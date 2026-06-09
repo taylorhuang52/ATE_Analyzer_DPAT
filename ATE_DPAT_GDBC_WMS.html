@@ -75,7 +75,6 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); min-
   cursor: pointer; transition: background 0.2s;
 }
 .drop-btn:hover { background: #33ddff; }
-#folderInput { display: none; }
 
 .format-hint {
   margin-top: 32px; max-width: 600px; width: 100%;
@@ -339,6 +338,124 @@ tr:hover td { background: rgba(0,212,255,0.03); }
 @media (max-width: 900px) { .diemap-matrix-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 600px) { .diemap-matrix-grid { grid-template-columns: repeat(2, 1fr); } }
 
+/* ── GDBC MAP ── */
+:root {
+  --gdbc: #f59e0b;        /* amber — GDBC-only kill */
+  --gdbc-dim: rgba(245,158,11,0.75);
+}
+.gdbc-banner {
+  background: linear-gradient(90deg, rgba(245,158,11,0.08), rgba(0,212,255,0.04));
+  border: 1px solid rgba(245,158,11,0.35);
+  border-radius: 10px; padding: 14px 20px; margin-bottom: 18px;
+  display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap;
+}
+.gdbc-banner-title { font-family: var(--mono); font-size: 13px; color: var(--gdbc); font-weight: 700; }
+.gdbc-banner-sub   { font-size: 12px; color: var(--text2); line-height: 1.6; }
+.gdbc-controls {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px;
+}
+.gdbc-controls label { font-size: 12px; color: var(--text2); font-family: var(--mono); }
+.gdbc-num-input {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 7px;
+  color: var(--accent); padding: 5px 10px; font-family: var(--mono); font-size: 13px;
+  outline: none; width: 60px; text-align: center;
+}
+.gdbc-num-input:focus { border-color: var(--gdbc); }
+.gdbc-mode-btn {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 7px;
+  color: var(--text2); padding: 5px 16px; font-family: var(--mono); font-size: 12px; cursor: pointer; transition: all 0.2s;
+}
+.gdbc-mode-btn.active { border-color: var(--gdbc); color: var(--gdbc); background: rgba(245,158,11,0.1); }
+.gdbc-legend {
+  display: flex; gap: 16px; flex-wrap: wrap; font-size: 11px; font-family: var(--mono); color: var(--text2);
+  margin-bottom: 16px; padding: 10px 16px;
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+}
+.gdbc-legend span { display: flex; align-items: center; gap: 6px; }
+.gdbc-legend .dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; flex-shrink: 0; }
+.gdbc-summary-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.gdbc-matrix-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 8px;
+}
+.gdbc-cell {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px 8px; display: flex; flex-direction: column; align-items: center; gap: 5px; min-width: 0;
+}
+.gdbc-cell.empty-slot {
+  background: transparent; border: 1px dashed rgba(30,58,95,0.3); opacity: 0.3; pointer-events: none;
+}
+.gdbc-cell-title {
+  font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--accent);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+}
+.gdbc-cell-stats { font-size: 10px; color: var(--text2); font-family: var(--mono); text-align: center; line-height: 1.6; }
+.gdbc-canvas-wrap { width: 100%; aspect-ratio: 1; position: relative; overflow: hidden; }
+.gdbc-canvas-wrap canvas { width: 100%; height: 100%; display: block; }
+.gdbc-wafer-table td.gdbc-extra { color: var(--gdbc); font-weight: 700; }
+.gdbc-wafer-table td.gdbc-zero  { color: var(--text2); opacity: 0.5; }
+
+@media (max-width: 900px) { .gdbc-matrix-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 600px) { .gdbc-matrix-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── WMS MAP ── */
+:root {
+  --wms: #06b6d4;          /* cyan — WMS-only kill */
+  --wms-dim: rgba(6,182,212,0.75);
+}
+.wms-banner {
+  background: linear-gradient(90deg, rgba(6,182,212,0.08), rgba(0,212,255,0.04));
+  border: 1px solid rgba(6,182,212,0.35);
+  border-radius: 10px; padding: 14px 20px; margin-bottom: 18px;
+  display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap;
+}
+.wms-banner-title { font-family: var(--mono); font-size: 13px; color: var(--wms); font-weight: 700; }
+.wms-banner-sub   { font-size: 12px; color: var(--text2); line-height: 1.6; }
+.wms-controls {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px;
+}
+.wms-controls label { font-size: 12px; color: var(--text2); font-family: var(--mono); }
+.wms-num-input {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 7px;
+  color: var(--wms); padding: 5px 10px; font-family: var(--mono); font-size: 13px;
+  outline: none; width: 60px; text-align: center;
+}
+.wms-num-input:focus { border-color: var(--wms); }
+.wms-mode-btn {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 7px;
+  color: var(--text2); padding: 5px 16px; font-family: var(--mono); font-size: 12px; cursor: pointer; transition: all 0.2s;
+}
+.wms-mode-btn.active { border-color: var(--wms); color: var(--wms); background: rgba(6,182,212,0.1); }
+.wms-legend {
+  display: flex; gap: 16px; flex-wrap: wrap; font-size: 11px; font-family: var(--mono); color: var(--text2);
+  margin-bottom: 16px; padding: 10px 16px;
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+}
+.wms-legend span { display: flex; align-items: center; gap: 6px; }
+.wms-legend .dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; flex-shrink: 0; }
+.wms-summary-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.wms-matrix-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 8px;
+}
+.wms-cell {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px 8px; display: flex; flex-direction: column; align-items: center; gap: 5px; min-width: 0;
+}
+.wms-cell.empty-slot {
+  background: transparent; border: 1px dashed rgba(30,58,95,0.3); opacity: 0.3; pointer-events: none;
+}
+.wms-cell-title {
+  font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--accent);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+}
+.wms-cell-stats { font-size: 10px; color: var(--text2); font-family: var(--mono); text-align: center; line-height: 1.6; }
+.wms-canvas-wrap { width: 100%; aspect-ratio: 1; position: relative; overflow: hidden; }
+.wms-canvas-wrap canvas { width: 100%; height: 100%; display: block; }
+.wms-wafer-table td.wms-extra { color: var(--wms); font-weight: 700; }
+.wms-wafer-table td.wms-zero  { color: var(--text2); opacity: 0.5; }
+
+@media (max-width: 900px) { .wms-matrix-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 600px) { .wms-matrix-grid { grid-template-columns: repeat(2, 1fr); } }
+
 @media (max-width: 700px) {
   .header, .summary-bar, .content, .yield-bar-wrap, .lot-bar { padding-left: 16px; padding-right: 16px; }
   .tabs { padding: 0 16px; }
@@ -373,8 +490,16 @@ tr:hover td { background: rgba(0,212,255,0.03); }
       或點擊下方按鈕選取資料夾<br>
       <small style="color:var(--border);font-size:11px">e.g.  RK30910/  內含多個 *_dlogTDO.csv</small>
     </div>
-    <label class="drop-btn" for="folderInput">選取資料夾</label>
-    <input type="file" id="folderInput" webkitdirectory multiple accept=".csv">
+    <div style="position:relative;display:inline-block;margin-top:24px">
+      <span class="drop-btn">選取資料夾</span>
+      <input type="file" id="folderInput" webkitdirectory multiple accept=".csv"
+        style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:0">
+    </div>
+  </div>
+
+  <div class="format-hint" id="debugPanel" style="display:none;margin-top:16px;border-color:rgba(255,204,0,0.4)">
+    <h4 style="color:#ffcc00">🔍 解析除錯資訊</h4>
+    <pre id="debugText" style="font-size:11px;color:var(--text2);white-space:pre-wrap;max-height:200px;overflow-y:auto;margin-top:8px"></pre>
   </div>
 
   <div class="format-hint">
@@ -430,6 +555,8 @@ tr:hover td { background: rgba(0,212,255,0.03); }
     <div class="tab" onclick="showTab('failanalysis')">❌ Fail Analysis</div>
     <div class="tab" onclick="showTab('dpat')">🔬 DPAT (AEC-Q001)</div>
     <div class="tab" onclick="showTab('diemap')">🗺️ DPAT Die Map</div>
+    <div class="tab" onclick="showTab('gdbc')">🔶 GDBC Map</div>
+    <div class="tab" onclick="showTab('wms')">🗂️ WMS Map</div>
   </div>
 
   <div class="content">
@@ -627,6 +754,138 @@ tr:hover td { background: rgba(0,212,255,0.03); }
       <div class="diemap-matrix-grid" id="diemapGrid"></div>
     </div>
 
+    <!-- GDBC Map Tab -->
+    <div id="tab-gdbc" style="display:none">
+
+      <!-- Banner -->
+      <div class="gdbc-banner">
+        <div>
+          <div class="gdbc-banner-title">🔶 GDBC — Good Die in Bad Cluster</div>
+          <div class="gdbc-banner-sub">
+            Step1: 將每片 Wafer 原始 Bin 展開為 (X,Y) 座標圖<br>
+            Step2: 以每顆 Die 為中心，計算 3×3 九宮格內的 Fail 顆數<br>
+            Step3: 邊緣 Die（九宮格不足9顆）空位補值 0.5 計入 Fail count<br>
+            Step4: 若九宮格 Fail count ≥ 閾值，則將該 Pass Die 標記為 GDBC Fail (改為 "0")<br>
+            Step5: 統計因 GDBC 而刷除的顆數，優先順序: <span style="color:var(--fail)">■ ATE Fail</span> &gt; <span style="color:#c084fc">■ DPAT Fail</span> &gt; <span style="color:var(--gdbc)">■ GDBC Fail</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="gdbc-controls">
+        <label>測試參數 (DPAT用)：</label>
+        <select class="dpat-param-select" id="gdbcParamSelect" onchange="renderGDBC()"></select>
+        <label style="margin-left:8px">DPAT 模式：</label>
+        <button class="gdbc-mode-btn active" id="gdbcDpatModeAll"   onclick="setGdbcDpatMode('all')">全 Lot 合併</button>
+        <button class="gdbc-mode-btn"        id="gdbcDpatModeWafer" onclick="setGdbcDpatMode('wafer')">逐片獨立</button>
+        <label style="margin-left:8px">GDBC 閾值（九宮格 Fail ≥）：</label>
+        <input class="gdbc-num-input" type="number" id="gdbcThreshold" value="5" min="1" max="9" step="0.5" onchange="renderGDBC()">
+      </div>
+
+      <!-- Legend -->
+      <div class="gdbc-legend">
+        <span><span class="dot" style="background:rgba(0,255,159,0.55)"></span>Pass (保留)</span>
+        <span><span class="dot" style="background:rgba(255,51,102,0.75)"></span>ATE Fail (Bin≠1) — 最高優先</span>
+        <span><span class="dot" style="background:#c084fc"></span>DPAT 刷除 — 次優先</span>
+        <span><span class="dot" style="background:var(--gdbc)"></span>GDBC 刷除 — 僅 GDBC 新增</span>
+        <span><span class="dot" style="background:#1e3a5f"></span>無量測點</span>
+      </div>
+
+      <!-- Summary cards -->
+      <div class="gdbc-summary-row" id="gdbcSummaryCards"></div>
+
+      <!-- Per-wafer stats table -->
+      <div class="section-title" style="margin-bottom:12px">Per Wafer — GDBC 額外刷除統計</div>
+      <div class="table-wrap" style="margin-bottom:24px">
+        <table class="gdbc-wafer-table">
+          <thead><tr>
+            <th>Wafer ID</th>
+            <th>Total In</th>
+            <th style="color:var(--fail)">ATE Fail</th>
+            <th style="color:#c084fc">DPAT Kill</th>
+            <th style="color:var(--gdbc)">GDBC Kill</th>
+            <th style="color:var(--gdbc)">GDBC 刷除率</th>
+            <th>GDBC 後 Pass</th>
+            <th>GDBC 後良率</th>
+          </tr></thead>
+          <tbody id="gdbcWaferTable"></tbody>
+        </table>
+      </div>
+
+      <!-- Wafer 5×5 matrix -->
+      <div class="section-title">Wafer 矩陣 (5×5) — Die 狀態圖</div>
+      <div class="gdbc-matrix-grid" id="gdbcGrid"></div>
+
+    </div>
+
+    <!-- WMS Map Tab -->
+    <div id="tab-wms" style="display:none">
+
+      <!-- Banner -->
+      <div class="wms-banner">
+        <div>
+          <div class="wms-banner-title">🗂️ WMS — Wafer Map Stacking</div>
+          <div class="wms-banner-sub">
+            Step1: 將每片 Wafer Raw Data 以 (X,Y) 座標展開<br>
+            Step2: 計算每一個座標點在全批 Wafer 的 Fail 顆數加總<br>
+            Step3: 若某座標點的 Fail Rate &gt; 閾值（例如 60%），則整批 Wafer 在該座標皆改為 Fail（原本 Pass → 改為 "0"）<br>
+            Step4: 統計因 WMS 條件而刷除的顆數，優先順序: <span style="color:var(--fail)">■ ATE Fail</span> &gt; <span style="color:#c084fc">■ DPAT Fail</span> &gt; <span style="color:var(--gdbc)">■ GDBC Fail</span> &gt; <span style="color:var(--wms)">■ WMS Fail</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="wms-controls">
+        <label>測試參數 (DPAT/GDBC用)：</label>
+        <select class="dpat-param-select" id="wmsParamSelect" onchange="renderWMS()"></select>
+        <label style="margin-left:8px">DPAT 模式：</label>
+        <button class="wms-mode-btn active" id="wmsDpatModeAll"   onclick="setWmsDpatMode('all')">全 Lot 合併</button>
+        <button class="wms-mode-btn"        id="wmsDpatModeWafer" onclick="setWmsDpatMode('wafer')">逐片獨立</button>
+        <label style="margin-left:8px">GDBC 閾值（九宮格 Fail ≥）：</label>
+        <input class="gdbc-num-input" type="number" id="wmsGdbcThreshold" value="5" min="1" max="9" step="0.5" onchange="renderWMS()">
+        <label style="margin-left:8px">WMS Fail Rate 閾值（%）：</label>
+        <input class="wms-num-input" type="number" id="wmsThreshold" value="60" min="1" max="100" step="1" onchange="renderWMS()">
+        <span style="font-size:12px;color:var(--text2);font-family:var(--mono)">%</span>
+      </div>
+
+      <!-- Legend -->
+      <div class="wms-legend">
+        <span><span class="dot" style="background:rgba(0,255,159,0.55)"></span>Pass (保留)</span>
+        <span><span class="dot" style="background:rgba(255,51,102,0.75)"></span>ATE Fail (Bin≠1) — 最高優先</span>
+        <span><span class="dot" style="background:#c084fc"></span>DPAT 刷除 — 次優先</span>
+        <span><span class="dot" style="background:var(--gdbc)"></span>GDBC 刷除 — 第三優先</span>
+        <span><span class="dot" style="background:var(--wms)"></span>WMS 刷除 — 高 Fail Rate 座標</span>
+        <span><span class="dot" style="background:#1e3a5f"></span>無量測點</span>
+      </div>
+
+      <!-- Summary cards -->
+      <div class="wms-summary-row" id="wmsSummaryCards"></div>
+
+      <!-- Per-wafer stats table -->
+      <div class="section-title" style="margin-bottom:12px">Per Wafer — WMS 額外刷除統計</div>
+      <div class="table-wrap" style="margin-bottom:24px">
+        <table class="wms-wafer-table">
+          <thead><tr>
+            <th>Wafer ID</th>
+            <th>Total In</th>
+            <th style="color:var(--fail)">ATE Fail</th>
+            <th style="color:#c084fc">DPAT Kill</th>
+            <th style="color:var(--gdbc)">GDBC Kill</th>
+            <th style="color:var(--wms)">WMS Kill</th>
+            <th style="color:var(--wms)">WMS 刷除率</th>
+            <th>WMS 後 Pass</th>
+            <th>WMS 後良率</th>
+          </tr></thead>
+          <tbody id="wmsWaferTable"></tbody>
+        </table>
+      </div>
+
+      <!-- Wafer 5×5 matrix -->
+      <div class="section-title">Wafer 矩陣 (5×5) — Die 狀態圖</div>
+      <div class="wms-matrix-grid" id="wmsGrid"></div>
+
+    </div>
+
   </div><!-- end .content -->
 </div><!-- end #dashboard -->
 
@@ -642,47 +901,90 @@ const PAGE_SIZE = 100;
 // ══════════════════════════════════════════
 //  DRAG & DROP + FILE INPUT
 // ══════════════════════════════════════════
-const dropZone = document.getElementById('dropZone');
+const dropZone    = document.getElementById('dropZone');
 const folderInput = document.getElementById('folderInput');
 
-dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
-dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
-dropZone.addEventListener('drop', e => {
-  e.preventDefault();
-  dropZone.classList.remove('drag-over');
-  const items = e.dataTransfer.items;
-  const files = [];
-  for (const item of items) {
-    const entry = item.webkitGetAsEntry ? item.webkitGetAsEntry() : null;
-    if (entry) {
-      readEntry(entry, files).then(() => { if (files.length) processFiles(files); });
-    }
-  }
-  // Fallback: files directly
-  if (!items || items.length === 0) {
-    const fileList = Array.from(e.dataTransfer.files).filter(f => f.name.endsWith('.csv'));
-    if (fileList.length) processFiles(fileList);
-  }
-});
-
+// ── File picker: native click via transparent overlay ──
+// No programmatic .click() needed — user clicks the visible span,
+// the transparent <input> on top receives the real click event.
 folderInput.addEventListener('change', e => {
-  const files = Array.from(e.target.files).filter(f => f.name.endsWith('.csv'));
+  const files = Array.from(e.target.files).filter(f => f.name.toLowerCase().endsWith('.csv'));
+  e.target.value = ''; // reset so same folder can be re-selected
   if (files.length) processFiles(files);
-  e.target.value = '';
+  else if (e.target.files.length > 0) alert('未找到 CSV 檔案，請確認資料夾內含 *_dlogTDO.csv');
 });
 
-async function readEntry(entry, files) {
-  if (entry.isFile && entry.name.endsWith('.csv')) {
-    await new Promise(res => entry.file(f => { files.push(f); res(); }));
-  } else if (entry.isDirectory) {
-    const reader = entry.createReader();
-    const entries = await new Promise(res => reader.readEntries(res));
-    for (const e of entries) await readEntry(e, files);
-  }
+// ── Import More button (inside dashboard) ──
+function importMore() {
+  // Create a temporary file input and trigger it
+  const tmp = document.createElement('input');
+  tmp.type = 'file';
+  tmp.webkitdirectory = true;
+  tmp.multiple = true;
+  tmp.accept = '.csv';
+  tmp.style.cssText = 'position:fixed;top:-9999px;left:-9999px';
+  document.body.appendChild(tmp);
+  tmp.addEventListener('change', e => {
+    const files = Array.from(e.target.files).filter(f => f.name.toLowerCase().endsWith('.csv'));
+    document.body.removeChild(tmp);
+    if (files.length) processFiles(files);
+  });
+  tmp.click();
 }
 
-function importMore() {
-  folderInput.click();
+// ── Drag over / leave ──
+dropZone.addEventListener('dragover', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  dropZone.classList.add('drag-over');
+});
+['dragleave', 'dragend'].forEach(evt => {
+  dropZone.addEventListener(evt, e => {
+    if (!dropZone.contains(e.relatedTarget)) {
+      dropZone.classList.remove('drag-over');
+    }
+  });
+});
+
+// ── Drop ──
+dropZone.addEventListener('drop', async e => {
+  e.preventDefault();
+  e.stopPropagation();
+  dropZone.classList.remove('drag-over');
+
+  const files = [];
+  const items = Array.from(e.dataTransfer.items || []);
+
+  if (items.length > 0 && typeof items[0].webkitGetAsEntry === 'function') {
+    // FileSystemEntry API — collect all entries first, then read all in parallel
+    const entries = items.map(i => i.webkitGetAsEntry()).filter(Boolean);
+    await Promise.all(entries.map(entry => readEntry(entry, files)));
+  } else {
+    // Fallback: flat file list from dataTransfer.files
+    Array.from(e.dataTransfer.files)
+      .filter(f => f.name.toLowerCase().endsWith('.csv'))
+      .forEach(f => files.push(f));
+  }
+
+  if (files.length) processFiles(files);
+  else alert('未找到 CSV 檔案，請確認資料夾內含 *_dlogTDO.csv');
+});
+
+// ── Recursive directory traversal ──
+async function readEntry(entry, files) {
+  if (!entry) return;
+  if (entry.isFile) {
+    if (entry.name.toLowerCase().endsWith('.csv')) {
+      await new Promise((resolve, reject) => entry.file(f => { files.push(f); resolve(); }, reject));
+    }
+  } else if (entry.isDirectory) {
+    const reader = entry.createReader();
+    let batch;
+    do {
+      batch = await new Promise((resolve, reject) => reader.readEntries(resolve, reject));
+      await Promise.all(batch.map(child => readEntry(child, files)));
+    } while (batch.length > 0);
+  }
 }
 
 // ══════════════════════════════════════════
@@ -744,6 +1046,24 @@ async function processFiles(files) {
   document.getElementById('progressFill').style.width = '100%';
   await new Promise(r => setTimeout(r, 200));
 
+  // ── Debug: show what was parsed ──
+  const dbg = [];
+  for (const [lid, ld] of Object.entries(lots)) {
+    dbg.push(`Lot: ${lid}  (${ld.wafers.length} wafers)`);
+    dbg.push(`  Params found: ${ld.colNames.length} → [${ld.colNames.slice(0,5).join(', ')}${ld.colNames.length>5?'...':''}]`);
+    ld.wafers.slice(0, 3).forEach(w => {
+      dbg.push(`  Wafer ${w.waferId}: sample=${w.sample} pass=${w.pass} fail=${w.fail} records=${w.records.length}`);
+      if (w.records.length > 0) {
+        const r = w.records[0];
+        dbg.push(`    First record: serial=${r.s} bin=${r.b} x=${r.x} y=${r.y} vals=[${r.v.slice(0,4).join(',')}]`);
+      }
+    });
+  }
+  if (dbg.length > 0) {
+    document.getElementById('debugText').textContent = dbg.join('\n');
+    document.getElementById('debugPanel').style.display = 'block';
+  }
+
   // Populate lot selector
   const sel = document.getElementById('lotSelect');
   sel.innerHTML = '';
@@ -751,6 +1071,17 @@ async function processFiles(files) {
     const opt = document.createElement('option');
     opt.value = id; opt.textContent = id;
     sel.appendChild(opt);
+  }
+
+  if (Object.keys(lots).length === 0) {
+    // Nothing parsed — show import screen with debug info
+    document.getElementById('progressScreen').style.display = 'none';
+    document.getElementById('importScreen').style.display = 'flex';
+    if (dbg && dbg.length === 0) {
+      document.getElementById('debugText').textContent = '⚠️ 未能解析任何 Wafer 資料\n\n可能原因:\n• CSV 格式與預期不符\n• 請上傳一個 CSV 檔案讓系統偵測格式';
+      document.getElementById('debugPanel').style.display = 'block';
+    }
+    return;
   }
 
   // Show first lot
@@ -764,58 +1095,158 @@ async function processFiles(files) {
 function parseCSV(text, filename, lotData) {
   const lines = text.split(/\r?\n/);
 
-  // Summary
-  let sample = 0, pass_ = 0, fail = 0;
-  for (let i = 0; i < lines.length; i++) {
-    const l = lines[i];
-    if (l.includes('Sample') && l.includes('Pass') && l.includes('Fail') && l.includes('Pass%')) {
-      const parts = lines[i+1]?.trim().split(/\s+/) || [];
-      if (parts.length >= 5) { sample = +parts[0]; pass_ = +parts[1]; fail = +parts[3]; }
-      break;
-    }
-  }
-
-  // Headers and limits
-  let colNames=[], unitNames=[], upperLimits=[], lowerLimits=[];
-  for (let i = 0; i < lines.length; i++) {
-    const l = lines[i];
-    if (l.startsWith(',,,,,,') && l.includes('Contact(1)')) {
-      colNames    = l.split(',').map(s=>s.trim());
-      unitNames   = (lines[i+1]||'').split(',').map(s=>s.trim());
-      // skip blank line (i+2), upper = i+3, lower = i+4
-      upperLimits = (lines[i+3]||'').split(',').map(s=>s.trim());
-      lowerLimits = (lines[i+4]||'').split(',').map(s=>s.trim());
-      break;
-    }
-  }
-
-  // Store limits in lotData if not yet set
-  if (lotData.colNames.length === 0 && colNames.length > 0) {
-    lotData.colNames    = colNames.slice(6, 25);
-    lotData.unitNames   = unitNames.slice(6, 25);
-    lotData.upperLimits = upperLimits.slice(6, 25);
-    lotData.lowerLimits = lowerLimits.slice(6, 25);
-  }
-
-  // Data rows
-  let inData = false;
-  const records = [];
+  // ── Wafer ID ──
+  let waferId = filename.replace(/_dlogTDO\.csv$/i, '').replace(/\.csv$/i, '');
+  // Try explicit "Wafer ID : XX" header
   for (const line of lines) {
-    if (line.startsWith('Serial#')) { inData = true; continue; }
-    if (!inData || !line.trim()) continue;
-    const p = line.split(',').map(s=>s.trim());
-    if (p.length > 4 && /^-?\d/.test(p[0])) {
-      records.push({ s: p[0], b: p[2], x: parseFloat(p[4]), y: parseFloat(p[5]), v: p.slice(6, 25) });
-    }
-  }
-
-  // Wafer ID from filename or Wafer ID header
-  let waferId = filename.replace('_dlogTDO.csv','').replace(/_.*$/,'');
-  // Try to find WaferID line
-  for (const line of lines) {
-    const m = line.match(/Wafer ID\s*:\s*(\S+)/);
+    const m = line.match(/Wafer\s*ID\s*[:\s]+(\S+)/i);
     if (m) { waferId = m[1]; break; }
   }
+
+  // ── Find the data-header row: contains "Serial#" ──
+  let dataHeaderIdx = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (/Serial#/i.test(lines[i])) { dataHeaderIdx = i; break; }
+  }
+
+  // ── Parse header block (4 rows above data or explicit search) ──
+  // Look for a row that has many comma-separated non-empty tokens (param names)
+  // Strategy: the row just BEFORE dataHeaderIdx usually contains the param structure,
+  // OR we scan for rows starting with 6+ commas (empty leading cols).
+  let colNames = [], unitNames = [], upperLimits = [], lowerLimits = [];
+
+  // Method A: search for 4-row header block ending just before dataHeaderIdx
+  if (dataHeaderIdx >= 4) {
+    // Try rows at offsets -4, -3, -2, -1 from dataHeaderIdx
+    const tryRows = [dataHeaderIdx - 4, dataHeaderIdx - 3, dataHeaderIdx - 2, dataHeaderIdx - 1];
+    for (const startIdx of tryRows) {
+      if (startIdx < 0) continue;
+      const row = lines[startIdx].split(',').map(s => s.trim());
+      // Heuristic: param name row has >= 5 non-empty values after col 5
+      const paramCols = row.slice(6).filter(s => s.length > 0);
+      if (paramCols.length >= 3) {
+        colNames    = row;
+        unitNames   = (lines[startIdx + 1] || '').split(',').map(s => s.trim());
+        upperLimits = (lines[startIdx + 2] || '').split(',').map(s => s.trim());
+        lowerLimits = (lines[startIdx + 3] || '').split(',').map(s => s.trim());
+        break;
+      }
+    }
+  }
+
+  // Method B: scan whole file for the header block
+  if (colNames.length === 0) {
+    for (let i = 0; i < lines.length - 3; i++) {
+      const row = lines[i].split(',').map(s => s.trim());
+      const paramCols = row.slice(5).filter(s => s.length > 0 && !/^\d+\.?\d*$/.test(s));
+      if (paramCols.length >= 3) {
+        // Verify next row looks like units (short strings or empty)
+        const nextRow = (lines[i+1]||'').split(',').map(s=>s.trim());
+        const unitCols = nextRow.slice(5).filter(s => s.length > 0);
+        // And row i+2 or i+3 looks numeric (limits)
+        const limRow = (lines[i+2]||'').split(',').map(s=>s.trim());
+        const numCols = limRow.slice(5).filter(s => s !== '' && !isNaN(parseFloat(s)));
+        if (unitCols.length >= 2 || numCols.length >= 2) {
+          colNames    = row;
+          unitNames   = nextRow;
+          upperLimits = limRow;
+          lowerLimits = (lines[i+3]||'').split(',').map(s=>s.trim());
+          break;
+        }
+      }
+    }
+  }
+
+  // ── Determine column offsets dynamically ──
+  // Find "Serial#" column index from the data header row
+  let serialCol = 0, siteCol = 1, binCol = 2, sbinCol = 3, xCol = 4, yCol = 5, firstParamCol = 6;
+  if (dataHeaderIdx >= 0) {
+    const hdr = lines[dataHeaderIdx].split(',').map(s => s.trim().toLowerCase());
+    const findCol = (...names) => {
+      for (const n of names) {
+        const idx = hdr.findIndex(h => h.includes(n));
+        if (idx >= 0) return idx;
+      }
+      return -1;
+    };
+    const sc = findCol('serial');
+    const bc = findCol('bin#', 'bin');
+    const xc = findCol('xadr', 'x_adr', 'x adr', 'xaddr', 'x');
+    const yc = findCol('yadr', 'y_adr', 'y adr', 'yaddr', 'y');
+    if (sc >= 0) serialCol = sc;
+    if (bc >= 0) binCol = bc;
+    if (xc >= 0) xCol = xc;
+    if (yc >= 0) yCol = yc;
+    // first param col = first col after the standard header cols
+    firstParamCol = Math.max(serialCol, binCol, xCol, yCol) + 1;
+    // but at least 6
+    if (firstParamCol < 6) firstParamCol = 6;
+  }
+
+  // ── Store limits ──
+  if (lotData.colNames.length === 0 && colNames.length > firstParamCol) {
+    const end = firstParamCol + 25;
+    lotData.colNames    = colNames.slice(firstParamCol, end).filter(s => s);
+    lotData.unitNames   = unitNames.slice(firstParamCol, end);
+    lotData.upperLimits = upperLimits.slice(firstParamCol, end);
+    lotData.lowerLimits = lowerLimits.slice(firstParamCol, end);
+  }
+
+  // ── Parse data rows ──
+  const records = [];
+  let inData = dataHeaderIdx >= 0;  // if we found the header, start right after
+  let startLine = dataHeaderIdx >= 0 ? dataHeaderIdx + 1 : 0;
+
+  for (let i = startLine; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.trim()) continue;
+    // If we didn't find header, detect start by "Serial#"
+    if (!inData) {
+      if (/Serial#/i.test(line)) { inData = true; continue; }
+      continue;
+    }
+    const p = line.split(',').map(s => s.trim());
+    if (p.length <= binCol) continue;
+    // First col must start with a digit (serial number)
+    if (!/^\d/.test(p[serialCol])) continue;
+    const paramEnd = firstParamCol + 25;
+    records.push({
+      s: p[serialCol],
+      b: p[binCol],
+      x: parseFloat(p[xCol]),
+      y: parseFloat(p[yCol]),
+      v: p.slice(firstParamCol, paramEnd)
+    });
+  }
+
+  // ── Summary: count pass/fail from records if header summary not found ──
+  let sample = records.length;
+  let pass_  = records.filter(r => r.b === '1').length;
+  let fail   = sample - pass_;
+
+  // Try to find a summary section for more accurate totals
+  for (let i = 0; i < lines.length; i++) {
+    const l = lines[i];
+    if (/Sample/i.test(l) && /Pass/i.test(l) && /Fail/i.test(l)) {
+      const next = lines[i+1]?.trim().split(/[\s,]+/) || [];
+      const nums = next.map(Number).filter(n => !isNaN(n) && n > 0);
+      if (nums.length >= 2) {
+        sample = nums[0] || sample;
+        pass_  = nums[1] || pass_;
+        fail   = (nums[3] !== undefined ? nums[3] : sample - pass_) || fail;
+        break;
+      }
+    }
+  }
+
+  // If still zero, use record counts
+  if (sample === 0 && records.length > 0) {
+    sample = records.length;
+    pass_  = records.filter(r => r.b === '1').length;
+    fail   = sample - pass_;
+  }
+
+  if (records.length === 0 && sample === 0) return null;
 
   return { waferId, file: filename, sample, pass: pass_, fail, records };
 }
@@ -1042,7 +1473,7 @@ function renderFailAnalysis(data, totalFail, totalIn) {
 // ══════════════════════════════════════════
 //  TAB SWITCHING
 // ══════════════════════════════════════════
-const TAB_IDS = ['overview','wafers','limits','ics','failanalysis','dpat','diemap'];
+const TAB_IDS = ['overview','wafers','limits','ics','failanalysis','dpat','diemap','gdbc','wms'];
 function showTab(name) {
   TAB_IDS.forEach(t => {
     document.getElementById('tab-'+t).style.display = t===name ? '' : 'none';
@@ -1053,6 +1484,8 @@ function showTab(name) {
   if (name === 'ics') { icPage = 0; renderICList(); }
   if (name === 'dpat') { initDPAT(); }
   if (name === 'diemap') { initDieMap(); }
+  if (name === 'gdbc') { initGDBC(); }
+  if (name === 'wms') { initWMS(); }
 }
 
 // ══════════════════════════════════════════
@@ -1611,6 +2044,9 @@ window.addEventListener('resize', () => {
     if (document.getElementById('tab-diemap')?.style.display !== 'none') {
       renderDieMap();
     }
+    if (document.getElementById('tab-gdbc')?.style.display !== 'none') {
+      renderGDBC();
+    }
   }, 120);
 });
 
@@ -1897,6 +2333,753 @@ function drawWaferDieMap(canvasId, wd) {
     ctx.fillText(dpatKilled, cx, cy);
     ctx.textBaseline = 'alphabetic';
   }
+}
+
+// ══════════════════════════════════════════
+//  GDBC — Good Die in Bad Cluster
+// ══════════════════════════════════════════
+let gdbcDpatMode = 'all'; // 'all' | 'wafer'
+
+function setGdbcDpatMode(m) {
+  gdbcDpatMode = m;
+  document.getElementById('gdbcDpatModeAll').classList.toggle('active', m === 'all');
+  document.getElementById('gdbcDpatModeWafer').classList.toggle('active', m === 'wafer');
+  renderGDBC();
+}
+
+function initGDBC() {
+  const data = lots[currentLot];
+  if (!data) return;
+  const sel = document.getElementById('gdbcParamSelect');
+  if (!sel) return;
+  if (sel.dataset.builtForLot !== currentLot) {
+    const prevName = sel.options[sel.selectedIndex]?.textContent || '';
+    sel.innerHTML = '';
+    data.colNames.forEach((name, i) => {
+      const opt = document.createElement('option');
+      opt.value = i; opt.textContent = name;
+      sel.appendChild(opt);
+    });
+    sel.dataset.builtForLot = currentLot;
+    const byName = data.colNames.findIndex(n => n === prevName);
+    const irIdx  = data.colNames.findIndex(n => n.toUpperCase().includes('IR0'));
+    if (byName >= 0)     sel.value = byName;
+    else if (irIdx >= 0) sel.value = irIdx;
+    else                 sel.value = 0;
+  }
+  renderGDBC();
+}
+
+/**
+ * Compute GDBC die classification for a single wafer.
+ *
+ * Priority (highest wins):
+ *   1  = ATE Fail  (Bin ≠ 1)
+ *   2  = DPAT Kill (was Pass but outside DPAT limits)
+ *   3  = GDBC Kill (Pass, inside DPAT, but 3x3 neighborhood fail-count ≥ threshold)
+ *   0  = Clean Pass
+ *
+ * @param {Array}  records      - wafer.records: [{s, b, x, y, v}, ...]
+ * @param {number} paramIdx     - column index for DPAT measurement
+ * @param {Object} dpatClamped  - {lo, hi} DPAT limits (may contain NaN → skip DPAT)
+ * @param {number} threshold    - GDBC cluster fail count threshold (default 5)
+ * @returns {Array}             - [{x, y, state: 0|1|2|3}, ...]
+ */
+function computeGDBCMap(records, paramIdx, dpatClamped, threshold) {
+  // ── Step 1: classify each die (ATE pass/fail + DPAT) ──
+  // Build a coordinate-keyed map for fast neighbour lookup
+  const dieMap = new Map(); // key = "x,y"
+  const dies   = [];
+
+  records.forEach(r => {
+    const x = r.x, y = r.y;
+    if (x === null || y === null || isNaN(x) || isNaN(y)) return;
+
+    const atePass  = r.b === '1';
+    const paramVal = parseFloat(r.v[paramIdx]);
+
+    let dpatKill = false;
+    if (atePass && !isNaN(dpatClamped?.lo) && !isNaN(dpatClamped?.hi)) {
+      if (!isNaN(paramVal) && (paramVal < dpatClamped.lo || paramVal > dpatClamped.hi)) {
+        dpatKill = true;
+      }
+    }
+
+    // Initial state before GDBC:
+    //  1 = ATE Fail  2 = DPAT Kill  0 = effective Pass (enters GDBC scan)
+    let initState;
+    if (!atePass)        initState = 1; // ATE Fail
+    else if (dpatKill)   initState = 2; // DPAT Kill
+    else                 initState = 0; // Candidate Pass → scan by GDBC
+
+    const die = { x, y, initState, gdbcKill: false };
+    dies.push(die);
+    dieMap.set(`${x},${y}`, die);
+  });
+
+  if (dies.length === 0) return dies;
+
+  // ── Step 2–4: GDBC scan ──
+  // For each "candidate Pass" die (initState === 0), count 3x3 neighbourhood fails.
+  // A "fail" in the neighbourhood is any die with initState ≠ 0  (ATE fail or DPAT kill).
+  // Edge rule: if a neighbourhood cell is outside the wafer map (no die),
+  //            it contributes 0.5 to the fail count.
+
+  const DX = [-1, 0, 1, -1, 0, 1, -1, 0, 1];
+  const DY = [-1, -1, -1, 0, 0, 0, 1, 1, 1];
+
+  dies.forEach(die => {
+    if (die.initState !== 0) return; // Only scan Pass dies
+
+    let failCount = 0;
+    for (let k = 0; k < 9; k++) {
+      const nx = die.x + DX[k];
+      const ny = die.y + DY[k];
+      if (nx === die.x && ny === die.y) continue; // skip self
+
+      const neighbour = dieMap.get(`${nx},${ny}`);
+      if (!neighbour) {
+        // Step 3: outside wafer boundary → +0.5
+        failCount += 0.5;
+      } else if (neighbour.initState !== 0) {
+        // Neighbour is ATE fail or DPAT kill → +1
+        failCount += 1;
+      }
+      // else neighbour is Pass → +0
+    }
+
+    // Step 4: if failCount ≥ threshold → mark as GDBC kill
+    if (failCount >= threshold) {
+      die.gdbcKill = true;
+    }
+  });
+
+  // Return final die list with resolved state:
+  //  1 = ATE Fail, 2 = DPAT Kill, 3 = GDBC Kill, 0 = Clean Pass
+  return dies.map(d => ({
+    x: d.x, y: d.y,
+    state: d.initState === 1 ? 1
+         : d.initState === 2 ? 2
+         : d.gdbcKill        ? 3
+         : 0
+  }));
+}
+
+function renderGDBC() {
+  const data = lots[currentLot];
+  if (!data) return;
+
+  const paramIdx = parseInt(document.getElementById('gdbcParamSelect').value);
+  if (isNaN(paramIdx)) return;
+  const threshold = parseFloat(document.getElementById('gdbcThreshold').value) || 5;
+
+  const specHiRaw = data.upperLimits[paramIdx];
+  const specLoRaw = data.lowerLimits[paramIdx];
+  const specHi = specHiRaw !== '' && specHiRaw !== undefined ? parseFloat(specHiRaw) : null;
+  const specLo = specLoRaw !== '' && specLoRaw !== undefined ? parseFloat(specLoRaw) : null;
+
+  // Global DPAT limits (for 'all' mode)
+  let globalClamped = { lo: NaN, hi: NaN };
+  if (gdbcDpatMode === 'all') {
+    const allPassVals = [];
+    data.wafers.forEach(w => w.records.forEach(r => {
+      if (r.b === '1') { const v = parseFloat(r.v[paramIdx]); if (!isNaN(v)) allPassVals.push(v); }
+    }));
+    const gs  = robustStats(allPassVals);
+    globalClamped = clampToSpec(gs.mean - dpatSigmaMult * gs.sigma,
+                                gs.mean + dpatSigmaMult * gs.sigma, specLo, specHi);
+  }
+
+  // ── Per-wafer computation ──
+  let totIn = 0, totAteFail = 0, totDpatKill = 0, totGdbcKill = 0;
+
+  const waferResults = data.wafers.map(w => {
+    let clamped = globalClamped;
+    if (gdbcDpatMode === 'wafer') {
+      const pv = [];
+      w.records.forEach(r => { if (r.b === '1') { const v = parseFloat(r.v[paramIdx]); if (!isNaN(v)) pv.push(v); } });
+      const ws = robustStats(pv);
+      clamped = clampToSpec(ws.mean - dpatSigmaMult * ws.sigma,
+                            ws.mean + dpatSigmaMult * ws.sigma, specLo, specHi);
+    }
+
+    const dieStates = computeGDBCMap(w.records, paramIdx, clamped, threshold);
+    const nAte   = dieStates.filter(d => d.state === 1).length;
+    const nDpat  = dieStates.filter(d => d.state === 2).length;
+    const nGdbc  = dieStates.filter(d => d.state === 3).length;
+    const nPass  = dieStates.filter(d => d.state === 0).length;
+    const total  = w.sample;
+
+    totIn       += total;
+    totAteFail  += nAte;
+    totDpatKill += nDpat;
+    totGdbcKill += nGdbc;
+
+    return { waferId: w.waferId, dieStates, nAte, nDpat, nGdbc, nPass, total };
+  });
+
+  // ── Summary cards ──
+  const gdbcYield = totIn > 0 ? ((totIn - totAteFail - totDpatKill - totGdbcKill) / totIn * 100).toFixed(2) : '0.00';
+  document.getElementById('gdbcSummaryCards').innerHTML = `
+    <div class="card blue">
+      <div class="card-label">Total Input</div>
+      <div class="card-value">${totIn.toLocaleString()}</div>
+      <div class="card-sub">所有 Wafer</div>
+    </div>
+    <div class="card red">
+      <div class="card-label">ATE Fail</div>
+      <div class="card-value" style="color:var(--fail)">${totAteFail.toLocaleString()}</div>
+      <div class="card-sub">Bin ≠ 1</div>
+    </div>
+    <div class="card purple">
+      <div class="card-label">DPAT Kill</div>
+      <div class="card-value" style="color:#c084fc">${totDpatKill.toLocaleString()}</div>
+      <div class="card-sub">超出 DPAT 範圍</div>
+    </div>
+    <div class="card orange">
+      <div class="card-label">GDBC Kill</div>
+      <div class="card-value" style="color:var(--gdbc)">${totGdbcKill.toLocaleString()}</div>
+      <div class="card-sub">閾值 ≥ ${threshold}</div>
+    </div>
+    <div class="card green">
+      <div class="card-label">GDBC 後良率</div>
+      <div class="card-value">${gdbcYield}%</div>
+      <div class="card-sub">三關後最終良品</div>
+    </div>
+  `;
+
+  // ── Per-wafer table ──
+  const tbody = document.getElementById('gdbcWaferTable');
+  tbody.innerHTML = '';
+  waferResults.forEach(wr => {
+    const gdbcRate = wr.total > 0 ? (wr.nGdbc / wr.total * 100).toFixed(2) : '0.00';
+    const finalPass = wr.nPass;
+    const finalYield = wr.total > 0 ? (finalPass / wr.total * 100).toFixed(2) : '—';
+    const yColor = parseFloat(finalYield) >= 90 ? 'var(--pass)' : parseFloat(finalYield) >= 70 ? '#ffcc00' : 'var(--fail)';
+    tbody.innerHTML += `<tr>
+      <td style="font-weight:700;color:var(--accent)">${wr.waferId}</td>
+      <td>${wr.total.toLocaleString()}</td>
+      <td class="${wr.nAte > 0 ? 'fail-row' : ''}" style="color:var(--fail)">${wr.nAte.toLocaleString()}</td>
+      <td style="color:#c084fc">${wr.nDpat.toLocaleString()}</td>
+      <td class="${wr.nGdbc > 0 ? 'gdbc-extra' : 'gdbc-zero'}">${wr.nGdbc > 0 ? '▼ ' + wr.nGdbc.toLocaleString() : '0'}</td>
+      <td class="${wr.nGdbc > 0 ? 'gdbc-extra' : 'gdbc-zero'}">${wr.nGdbc > 0 ? gdbcRate + '%' : '—'}</td>
+      <td style="color:var(--pass)">${finalPass.toLocaleString()}</td>
+      <td style="color:${yColor}">${finalYield}%</td>
+    </tr>`;
+  });
+
+  // ── 5×5 grid ──
+  const grid = document.getElementById('gdbcGrid');
+  grid.innerHTML = '';
+  const COLS = 5;
+  const totalSlots = Math.ceil(waferResults.length / COLS) * COLS;
+
+  for (let i = 0; i < totalSlots; i++) {
+    const cell = document.createElement('div');
+    if (i >= waferResults.length) {
+      cell.className = 'gdbc-cell empty-slot';
+      cell.innerHTML = '<div style="font-size:18px;opacity:0.2">⬜</div>';
+      grid.appendChild(cell);
+      continue;
+    }
+    const wr = waferResults[i];
+    cell.className = 'gdbc-cell';
+    const canvasId = `gdbc-canvas-${i}`;
+    const gdbcRate = wr.total > 0 ? (wr.nGdbc / wr.total * 100).toFixed(1) : '0.0';
+    cell.innerHTML = `
+      <div class="gdbc-cell-title" title="${wr.waferId}">${wr.waferId}</div>
+      <div class="gdbc-canvas-wrap"><canvas id="${canvasId}"></canvas></div>
+      <div class="gdbc-cell-stats">
+        <span style="color:var(--gdbc);font-weight:700">GDBC: ${wr.nGdbc}</span>
+        &nbsp;(${gdbcRate}%)<br>
+        <span style="color:#c084fc">DPAT: ${wr.nDpat}</span>
+        &nbsp;/&nbsp;
+        <span style="color:var(--fail)">ATE: ${wr.nAte}</span>
+      </div>`;
+    grid.appendChild(cell);
+    requestAnimationFrame(() => drawGDBCWaferMap(canvasId, wr));
+  }
+}
+
+function drawGDBCWaferMap(canvasId, wr) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+
+  const size = canvas.parentElement.getBoundingClientRect().width || 160;
+  canvas.width  = size * window.devicePixelRatio;
+  canvas.height = size * window.devicePixelRatio;
+  canvas.style.width  = size + 'px';
+  canvas.style.height = size + 'px';
+
+  const ctx = canvas.getContext('2d');
+  const sc = window.devicePixelRatio;
+  ctx.scale(sc, sc);
+  const W = size, H = size;
+
+  ctx.fillStyle = '#0d1520';
+  ctx.fillRect(0, 0, W, H);
+
+  const dies = wr.dieStates;
+  const withCoords = dies.filter(d => !isNaN(d.x) && !isNaN(d.y));
+
+  if (withCoords.length === 0) {
+    // Fallback: donut / pie summary
+    const total = wr.total;
+    if (total === 0) return;
+    const segments = [
+      { v: wr.nPass,  c: 'rgba(0,255,159,0.55)' },
+      { v: wr.nGdbc,  c: '#f59e0b' },
+      { v: wr.nDpat,  c: '#c084fc' },
+      { v: wr.nAte,   c: 'rgba(255,51,102,0.7)' },
+    ].filter(s => s.v > 0);
+
+    const cx = W/2, cy = H/2, r = Math.min(W,H)*0.42;
+    let ang = -Math.PI/2;
+    segments.forEach(s => {
+      const sweep = (s.v / total) * Math.PI * 2;
+      ctx.beginPath(); ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, ang, ang + sweep);
+      ctx.closePath();
+      ctx.fillStyle = s.c; ctx.fill();
+      ang += sweep;
+    });
+    // donut hole
+    ctx.beginPath(); ctx.arc(cx, cy, r * 0.46, 0, Math.PI*2);
+    ctx.fillStyle = '#0d1520'; ctx.fill();
+    // center GDBC label
+    ctx.fillStyle = '#f59e0b';
+    ctx.font = `bold ${W*0.13}px JetBrains Mono, monospace`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(wr.nGdbc, cx, cy);
+    ctx.textBaseline = 'alphabetic';
+    return;
+  }
+
+  // Real XY coordinate map
+  const xs = withCoords.map(d => d.x);
+  const ys = withCoords.map(d => d.y);
+  const minX = Math.min(...xs), maxX = Math.max(...xs);
+  const minY = Math.min(...ys), maxY = Math.max(...ys);
+  const rangeX = maxX - minX || 1;
+  const rangeY = maxY - minY || 1;
+  const PAD = W * 0.04;
+  const plotW = W - PAD * 2;
+  const plotH = H - PAD * 2;
+  const cellW = plotW / (rangeX + 1);
+  const cellH = plotH / (rangeY + 1);
+  const dotR  = Math.max(0.8, Math.min(cellW, cellH) * 0.40);
+
+  // Wafer circle outline
+  ctx.beginPath();
+  ctx.arc(W/2, H/2, Math.min(W,H)/2 - 2, 0, Math.PI*2);
+  ctx.strokeStyle = 'rgba(30,58,95,0.5)'; ctx.lineWidth = 1; ctx.stroke();
+
+  // Color map — priority: ATE > DPAT > GDBC > Pass
+  const COLORS = [
+    'rgba(0,255,159,0.50)',   // 0: Pass
+    'rgba(255,51,102,0.80)',  // 1: ATE Fail
+    '#c084fc',                // 2: DPAT Kill
+    '#f59e0b',                // 3: GDBC Kill
+  ];
+  const BORDER_COLORS = [null, null, '#e040fb', '#d97706'];
+
+  withCoords.forEach(d => {
+    const cx = PAD + (d.x - minX) * cellW + cellW / 2;
+    const cy = PAD + (d.y - minY) * cellH + cellH / 2;
+    const color  = COLORS[d.state];
+    const border = BORDER_COLORS[d.state];
+
+    if (dotR >= 1.5) {
+      ctx.fillStyle = color;
+      ctx.fillRect(cx - dotR, cy - dotR, dotR * 2, dotR * 2);
+      if (border) {
+        ctx.strokeStyle = border;
+        ctx.lineWidth = dotR > 3 ? 0.8 : 0.4;
+        ctx.strokeRect(cx - dotR, cy - dotR, dotR * 2, dotR * 2);
+      }
+    } else {
+      ctx.beginPath();
+      ctx.arc(cx, cy, Math.max(0.6, dotR), 0, Math.PI*2);
+      ctx.fillStyle = color; ctx.fill();
+    }
+  });
+}
+
+
+
+// ══════════════════════════════════════════
+//  WMS — Wafer Map Stacking
+// ══════════════════════════════════════════
+let wmsDpatMode = 'all'; // 'all' | 'wafer'
+
+function setWmsDpatMode(m) {
+  wmsDpatMode = m;
+  document.getElementById('wmsDpatModeAll').classList.toggle('active', m === 'all');
+  document.getElementById('wmsDpatModeWafer').classList.toggle('active', m === 'wafer');
+  renderWMS();
+}
+
+function initWMS() {
+  const data = lots[currentLot];
+  if (!data) return;
+  const sel = document.getElementById('wmsParamSelect');
+  if (!sel) return;
+  if (sel.dataset.builtForLot !== currentLot) {
+    const prevName = sel.options[sel.selectedIndex]?.textContent || '';
+    sel.innerHTML = '';
+    data.colNames.forEach((name, i) => {
+      const opt = document.createElement('option');
+      opt.value = i; opt.textContent = name;
+      sel.appendChild(opt);
+    });
+    sel.dataset.builtForLot = currentLot;
+    const byName = data.colNames.findIndex(n => n === prevName);
+    const irIdx  = data.colNames.findIndex(n => n.toUpperCase().includes('IR0'));
+    if (byName >= 0)     sel.value = byName;
+    else if (irIdx >= 0) sel.value = irIdx;
+    else                 sel.value = 0;
+  }
+  renderWMS();
+}
+
+/**
+ * WMS (Wafer Map Stacking) die classification.
+ *
+ * Priority (highest wins):
+ *   1 = ATE Fail  (Bin ≠ 1)
+ *   2 = DPAT Kill (Pass but outside DPAT limits)
+ *   3 = GDBC Kill (Pass+DPAT OK, but 3×3 neighbourhood fail-count ≥ gdbcThreshold)
+ *   4 = WMS Kill  (Pass+DPAT+GDBC OK, but coordinate fail-rate ≥ wmsThreshold)
+ *   0 = Clean Pass
+ *
+ * The WMS fail-rate denominator counts wafers where the die at that coord
+ * is failed by ATE, DPAT, **or** GDBC (states 1/2/3).
+ *
+ * @param {Array}  wafers          - lot.wafers array
+ * @param {number} paramIdx        - column index for DPAT/GDBC measurement
+ * @param {Object} globalClamped   - {lo, hi} DPAT limits for 'all' mode
+ * @param {string} dpatMode        - 'all' | 'wafer'
+ * @param {number} gdbcThreshold   - GDBC 3×3 neighbourhood fail count threshold
+ * @param {number} wmsThreshold    - WMS fail-rate threshold (0–1, e.g. 0.60)
+ * @param {Object} specBounds      - {specLo, specHi}
+ * @returns {Array}                - per-wafer result objects
+ */
+function computeWMS(wafers, paramIdx, globalClamped, dpatMode, gdbcThreshold, wmsThreshold, specBounds) {
+  const { specLo, specHi } = specBounds;
+
+  // ── Pass 1: ATE + DPAT + GDBC classification per wafer ──
+  // Re-use the existing computeGDBCMap() for ATE/DPAT/GDBC; just need per-wafer clamped limits.
+  const waferMaps = wafers.map(w => {
+    let clamped = globalClamped;
+    if (dpatMode === 'wafer') {
+      const pv = [];
+      w.records.forEach(r => {
+        if (r.b === '1') { const v = parseFloat(r.v[paramIdx]); if (!isNaN(v)) pv.push(v); }
+      });
+      const ws = robustStats(pv);
+      clamped = clampToSpec(
+        ws.mean - dpatSigmaMult * ws.sigma,
+        ws.mean + dpatSigmaMult * ws.sigma,
+        specLo, specHi
+      );
+    }
+
+    // computeGDBCMap returns [{x, y, state}] where state: 0=Pass,1=ATE,2=DPAT,3=GDBC
+    const gdbcDies = computeGDBCMap(w.records, paramIdx, clamped, gdbcThreshold);
+
+    // Build coord→state map (state 0/1/2/3 from GDBC step)
+    const dieMap = new Map();
+    gdbcDies.forEach(d => dieMap.set(`${d.x},${d.y}`, { x: d.x, y: d.y, preState: d.state }));
+
+    return { waferId: w.waferId, sample: w.sample, dieMap };
+  });
+
+  // ── Pass 2: build global fail-count map (ATE + DPAT + GDBC all count as "fail") ──
+  const coordTotal = new Map(); // coord → wafer count with a die here
+  const coordFail  = new Map(); // coord → wafer count where preState ≠ 0
+
+  waferMaps.forEach(wm => {
+    wm.dieMap.forEach((die, key) => {
+      coordTotal.set(key, (coordTotal.get(key) || 0) + 1);
+      if (die.preState !== 0) {
+        coordFail.set(key, (coordFail.get(key) || 0) + 1);
+      }
+    });
+  });
+
+  // ── Pass 3: identify WMS hot-spot coordinates ──
+  const hotSpots = new Set();
+  coordTotal.forEach((total, key) => {
+    const fails = coordFail.get(key) || 0;
+    if (total > 0 && fails / total >= wmsThreshold) {
+      hotSpots.add(key);
+    }
+  });
+
+  // ── Pass 4: apply WMS kill — only to Clean Pass (preState===0) in hot spots ──
+  return waferMaps.map(wm => {
+    const dieStates = [];
+    wm.dieMap.forEach((die, key) => {
+      let finalState;
+      if      (die.preState !== 0)  finalState = die.preState; // ATE(1)/DPAT(2)/GDBC(3) — keep
+      else if (hotSpots.has(key))   finalState = 4;            // WMS Kill
+      else                          finalState = 0;            // Clean Pass
+      dieStates.push({ x: die.x, y: die.y, state: finalState });
+    });
+
+    const nAte  = dieStates.filter(d => d.state === 1).length;
+    const nDpat = dieStates.filter(d => d.state === 2).length;
+    const nGdbc = dieStates.filter(d => d.state === 3).length;
+    const nWms  = dieStates.filter(d => d.state === 4).length;
+    const nPass = dieStates.filter(d => d.state === 0).length;
+    return { waferId: wm.waferId, dieStates, nAte, nDpat, nGdbc, nWms, nPass, total: wm.sample };
+  });
+}
+
+function renderWMS() {
+  const data = lots[currentLot];
+  if (!data) return;
+
+  const paramIdx = parseInt(document.getElementById('wmsParamSelect').value);
+  if (isNaN(paramIdx)) return;
+  const gdbcThreshold = parseFloat(document.getElementById('wmsGdbcThreshold').value) || 5;
+  const thresholdPct  = parseFloat(document.getElementById('wmsThreshold').value) || 60;
+  const wmsThreshold  = thresholdPct / 100;
+
+  const specHiRaw = data.upperLimits[paramIdx];
+  const specLoRaw = data.lowerLimits[paramIdx];
+  const specHi = specHiRaw !== '' && specHiRaw !== undefined ? parseFloat(specHiRaw) : null;
+  const specLo = specLoRaw !== '' && specLoRaw !== undefined ? parseFloat(specLoRaw) : null;
+
+  // Global DPAT limits (for 'all' mode)
+  let globalClamped = { lo: NaN, hi: NaN };
+  if (wmsDpatMode === 'all') {
+    const allPassVals = [];
+    data.wafers.forEach(w => w.records.forEach(r => {
+      if (r.b === '1') { const v = parseFloat(r.v[paramIdx]); if (!isNaN(v)) allPassVals.push(v); }
+    }));
+    const gs = robustStats(allPassVals);
+    globalClamped = clampToSpec(
+      gs.mean - dpatSigmaMult * gs.sigma,
+      gs.mean + dpatSigmaMult * gs.sigma,
+      specLo, specHi
+    );
+  }
+
+  // ── Run WMS computation ──
+  const waferResults = computeWMS(
+    data.wafers, paramIdx, globalClamped,
+    wmsDpatMode, gdbcThreshold, wmsThreshold, { specLo, specHi }
+  );
+
+  // ── Totals ──
+  let totIn = 0, totAteFail = 0, totDpatKill = 0, totGdbcKill = 0, totWmsKill = 0;
+  waferResults.forEach(wr => {
+    totIn       += wr.total;
+    totAteFail  += wr.nAte;
+    totDpatKill += wr.nDpat;
+    totGdbcKill += wr.nGdbc;
+    totWmsKill  += wr.nWms;
+  });
+
+  // ── Summary cards ──
+  const wmsYield = totIn > 0
+    ? ((totIn - totAteFail - totDpatKill - totGdbcKill - totWmsKill) / totIn * 100).toFixed(2)
+    : '0.00';
+
+  document.getElementById('wmsSummaryCards').innerHTML = `
+    <div class="card blue">
+      <div class="card-label">Total Input</div>
+      <div class="card-value">${totIn.toLocaleString()}</div>
+      <div class="card-sub">所有 Wafer</div>
+    </div>
+    <div class="card red">
+      <div class="card-label">ATE Fail</div>
+      <div class="card-value" style="color:var(--fail)">${totAteFail.toLocaleString()}</div>
+      <div class="card-sub">Bin ≠ 1</div>
+    </div>
+    <div class="card purple">
+      <div class="card-label">DPAT Kill</div>
+      <div class="card-value" style="color:#c084fc">${totDpatKill.toLocaleString()}</div>
+      <div class="card-sub">超出 DPAT 範圍</div>
+    </div>
+    <div class="card orange">
+      <div class="card-label">GDBC Kill</div>
+      <div class="card-value" style="color:var(--gdbc)">${totGdbcKill.toLocaleString()}</div>
+      <div class="card-sub">閾值 ≥ ${gdbcThreshold}</div>
+    </div>
+    <div class="card" style="background:var(--surface2);border:1px solid var(--border);border-top:2px solid var(--wms)">
+      <div class="card-label">WMS Kill</div>
+      <div class="card-value" style="color:var(--wms)">${totWmsKill.toLocaleString()}</div>
+      <div class="card-sub">Fail Rate ≥ ${thresholdPct}%</div>
+    </div>
+    <div class="card green">
+      <div class="card-label">WMS 後良率</div>
+      <div class="card-value">${wmsYield}%</div>
+      <div class="card-sub">四關後最終良品</div>
+    </div>
+  `;
+
+  // ── Per-wafer table ──
+  const tbody = document.getElementById('wmsWaferTable');
+  tbody.innerHTML = '';
+  waferResults.forEach(wr => {
+    const wmsRate    = wr.total > 0 ? (wr.nWms / wr.total * 100).toFixed(2) : '0.00';
+    const finalPass  = wr.nPass;
+    const finalYield = wr.total > 0 ? (finalPass / wr.total * 100).toFixed(2) : '—';
+    const yColor = parseFloat(finalYield) >= 90 ? 'var(--pass)' : parseFloat(finalYield) >= 70 ? '#ffcc00' : 'var(--fail)';
+    tbody.innerHTML += `<tr>
+      <td style="font-weight:700;color:var(--accent)">${wr.waferId}</td>
+      <td>${wr.total.toLocaleString()}</td>
+      <td style="color:var(--fail)">${wr.nAte.toLocaleString()}</td>
+      <td style="color:#c084fc">${wr.nDpat.toLocaleString()}</td>
+      <td style="color:var(--gdbc)">${wr.nGdbc.toLocaleString()}</td>
+      <td class="${wr.nWms > 0 ? 'wms-extra' : 'wms-zero'}">${wr.nWms > 0 ? '▼ ' + wr.nWms.toLocaleString() : '0'}</td>
+      <td class="${wr.nWms > 0 ? 'wms-extra' : 'wms-zero'}">${wr.nWms > 0 ? wmsRate + '%' : '—'}</td>
+      <td style="color:var(--pass)">${finalPass.toLocaleString()}</td>
+      <td style="color:${yColor}">${finalYield}%</td>
+    </tr>`;
+  });
+
+  // ── 5×5 wafer grid ──
+  const grid = document.getElementById('wmsGrid');
+  grid.innerHTML = '';
+  const COLS = 5;
+  const totalSlots = Math.ceil(waferResults.length / COLS) * COLS;
+
+  for (let i = 0; i < totalSlots; i++) {
+    const cell = document.createElement('div');
+    if (i >= waferResults.length) {
+      cell.className = 'wms-cell empty-slot';
+      cell.innerHTML = '<div style="font-size:18px;opacity:0.2">⬜</div>';
+      grid.appendChild(cell);
+      continue;
+    }
+    const wr = waferResults[i];
+    cell.className = 'wms-cell';
+    const canvasId = `wms-canvas-${i}`;
+    const wmsRate = wr.total > 0 ? (wr.nWms / wr.total * 100).toFixed(1) : '0.0';
+    cell.innerHTML = `
+      <div class="wms-cell-title" title="${wr.waferId}">${wr.waferId}</div>
+      <div class="wms-canvas-wrap"><canvas id="${canvasId}"></canvas></div>
+      <div class="wms-cell-stats">
+        <span style="color:var(--wms);font-weight:700">WMS: ${wr.nWms}</span>
+        &nbsp;(${wmsRate}%)<br>
+        <span style="color:var(--gdbc)">GDBC: ${wr.nGdbc}</span>
+        &nbsp;/&nbsp;
+        <span style="color:#c084fc">DPAT: ${wr.nDpat}</span>
+        &nbsp;/&nbsp;
+        <span style="color:var(--fail)">ATE: ${wr.nAte}</span>
+      </div>`;
+    grid.appendChild(cell);
+    requestAnimationFrame(() => drawWMSWaferMap(canvasId, wr));
+  }
+}
+
+function drawWMSWaferMap(canvasId, wr) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+
+  const size = canvas.parentElement.getBoundingClientRect().width || 160;
+  canvas.width  = size * window.devicePixelRatio;
+  canvas.height = size * window.devicePixelRatio;
+  canvas.style.width  = size + 'px';
+  canvas.style.height = size + 'px';
+
+  const ctx = canvas.getContext('2d');
+  const sc = window.devicePixelRatio;
+  ctx.scale(sc, sc);
+  const W = size, H = size;
+
+  ctx.fillStyle = '#0d1520';
+  ctx.fillRect(0, 0, W, H);
+
+  const dies = wr.dieStates;
+  const withCoords = dies.filter(d => !isNaN(d.x) && !isNaN(d.y));
+
+  if (withCoords.length === 0) {
+    // Fallback: donut / pie summary
+    const total = wr.total;
+    if (total === 0) return;
+    const segments = [
+      { v: wr.nPass, c: 'rgba(0,255,159,0.55)' },
+      { v: wr.nWms,  c: '#06b6d4' },
+      { v: wr.nGdbc, c: '#f59e0b' },
+      { v: wr.nDpat, c: '#c084fc' },
+      { v: wr.nAte,  c: 'rgba(255,51,102,0.7)' },
+    ].filter(s => s.v > 0);
+
+    const cx = W/2, cy = H/2, r = Math.min(W,H)*0.42;
+    let ang = -Math.PI/2;
+    segments.forEach(s => {
+      const sweep = (s.v / total) * Math.PI * 2;
+      ctx.beginPath(); ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, ang, ang + sweep);
+      ctx.closePath();
+      ctx.fillStyle = s.c; ctx.fill();
+      ang += sweep;
+    });
+    // Donut hole
+    ctx.beginPath(); ctx.arc(cx, cy, r * 0.46, 0, Math.PI*2);
+    ctx.fillStyle = '#0d1520'; ctx.fill();
+    // Center WMS label
+    ctx.fillStyle = '#06b6d4';
+    ctx.font = `bold ${W*0.13}px JetBrains Mono, monospace`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(wr.nWms, cx, cy);
+    ctx.textBaseline = 'alphabetic';
+    return;
+  }
+
+  // Real XY coordinate map
+  const xs = withCoords.map(d => d.x);
+  const ys = withCoords.map(d => d.y);
+  const minX = Math.min(...xs), maxX = Math.max(...xs);
+  const minY = Math.min(...ys), maxY = Math.max(...ys);
+  const rangeX = maxX - minX || 1;
+  const rangeY = maxY - minY || 1;
+  const PAD  = W * 0.04;
+  const plotW = W - PAD * 2;
+  const plotH = H - PAD * 2;
+  const cellW = plotW / (rangeX + 1);
+  const cellH = plotH / (rangeY + 1);
+  const dotR  = Math.max(0.8, Math.min(cellW, cellH) * 0.40);
+
+  // Wafer circle outline
+  ctx.beginPath();
+  ctx.arc(W/2, H/2, Math.min(W,H)/2 - 2, 0, Math.PI*2);
+  ctx.strokeStyle = 'rgba(30,58,95,0.5)'; ctx.lineWidth = 1; ctx.stroke();
+
+  // Color map — priority: ATE(1) > DPAT(2) > GDBC(3) > WMS(4) > Pass(0)
+  const COLORS = [
+    'rgba(0,255,159,0.50)',   // 0: Pass
+    'rgba(255,51,102,0.80)',  // 1: ATE Fail
+    '#c084fc',                // 2: DPAT Kill
+    '#f59e0b',                // 3: GDBC Kill (amber)
+    '#06b6d4',                // 4: WMS Kill (cyan)
+  ];
+  const BORDER_COLORS = [null, null, '#e040fb', '#d97706', '#0891b2'];
+
+  withCoords.forEach(d => {
+    const cx = PAD + (d.x - minX) * cellW + cellW / 2;
+    const cy = PAD + (d.y - minY) * cellH + cellH / 2;
+    const color  = COLORS[d.state];
+    const border = BORDER_COLORS[d.state];
+
+    if (dotR >= 1.5) {
+      ctx.fillStyle = color;
+      ctx.fillRect(cx - dotR, cy - dotR, dotR * 2, dotR * 2);
+      if (border) {
+        ctx.strokeStyle = border;
+        ctx.lineWidth = dotR > 3 ? 0.8 : 0.4;
+        ctx.strokeRect(cx - dotR, cy - dotR, dotR * 2, dotR * 2);
+      }
+    } else {
+      ctx.beginPath();
+      ctx.arc(cx, cy, Math.max(0.6, dotR), 0, Math.PI*2);
+      ctx.fillStyle = color; ctx.fill();
+    }
+  });
 }
 
 </script>
