@@ -484,11 +484,12 @@ tr:hover td { background: rgba(0,212,255,0.03); }
   </div>
 
   <div class="drop-zone" id="dropZone">
-    <div class="drop-icon">📁</div>
-    <div class="drop-main">拖曳資料夾到此處</div>
+    <div class="drop-icon">📄</div>
+    <div class="drop-main">拖曳 CSV 檔案到此處</div>
     <div class="drop-sub">
+      可一次拖曳多個 *_dlogTDO.csv 檔案<br>
       或點擊下方按鈕選取資料夾<br>
-      <small style="color:var(--border);font-size:11px">e.g.  RK30910/  內含多個 *_dlogTDO.csv</small>
+      <small style="color:var(--border);font-size:11px">e.g.  RK30910-01_dlogTDO.csv, RK30910-02_dlogTDO.csv ...</small>
     </div>
     <div style="position:relative;display:inline-block;margin-top:24px">
       <span class="drop-btn">選取資料夾</span>
@@ -904,6 +905,12 @@ const PAGE_SIZE = 100;
 const dropZone    = document.getElementById('dropZone');
 const folderInput = document.getElementById('folderInput');
 
+// ── Global guard: prevent browser from navigating to / opening dropped
+//    files when the drop lands outside the drop-zone (otherwise the whole
+//    page appears to "disappear" as the browser loads the file directly) ──
+window.addEventListener('dragover', e => e.preventDefault());
+window.addEventListener('drop', e => e.preventDefault());
+
 // ── File picker: native click via transparent overlay ──
 // No programmatic .click() needed — user clicks the visible span,
 // the transparent <input> on top receives the real click event.
@@ -952,19 +959,8 @@ dropZone.addEventListener('drop', async e => {
   e.stopPropagation();
   dropZone.classList.remove('drag-over');
 
-  const files = [];
-  const items = Array.from(e.dataTransfer.items || []);
-
-  if (items.length > 0 && typeof items[0].webkitGetAsEntry === 'function') {
-    // FileSystemEntry API — collect all entries first, then read all in parallel
-    const entries = items.map(i => i.webkitGetAsEntry()).filter(Boolean);
-    await Promise.all(entries.map(entry => readEntry(entry, files)));
-  } else {
-    // Fallback: flat file list from dataTransfer.files
-    Array.from(e.dataTransfer.files)
-      .filter(f => f.name.toLowerCase().endsWith('.csv'))
-      .forEach(f => files.push(f));
-  }
+  const files = Array.from(e.dataTransfer.files || [])
+    .filter(f => f.name.toLowerCase().endsWith('.csv'));
 
   if (files.length) processFiles(files);
   else alert('未找到 CSV 檔案，請確認資料夾內含 *_dlogTDO.csv');
